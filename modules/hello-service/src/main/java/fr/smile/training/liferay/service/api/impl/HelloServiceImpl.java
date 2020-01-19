@@ -1,7 +1,12 @@
 package fr.smile.training.liferay.service.api.impl;
 
+import org.osgi.service.component.annotations.Component;
+
 import fr.smile.training.liferay.service.api.api.HelloService;
 
+@Component(immediate = true, property = { "foo=bar", "foo=baz"
+
+}, service = HelloService.class)
 public class HelloServiceImpl implements HelloService {
 
 	@Override
