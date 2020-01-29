@@ -1,0 +1,4 @@
+Bundle-Name: advanced-web
+Bundle-SymbolicName: fr.smile.training.web.portlet
+Bundle-Version: 1.0.0
+Export-Package: fr.smile.training.web.portlet.constants
