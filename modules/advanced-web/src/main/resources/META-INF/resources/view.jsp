@@ -32,3 +32,9 @@ city : ${advancedPortletInstanceConfiguration.city()}
 <div style="display: none;" id="addEducationURL">${addEducation}</div>
 
 <aui:input name="education" id="education" onChange="addEducation()" label="education" inlineField="true" value="" />
+
+
+<%-- https://portal.liferay.dev/docs/7-2/frameworks/-/knowledge_base/f/configurable-applications --%>
+<%-- Get city configuration --%>
+<h2>City from configuration (portlet scope) -> ${city}</h2>
+<h2>Planet from configuration (system scope) -> ${planet}</h2>

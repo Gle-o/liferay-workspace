@@ -23,6 +23,7 @@ import fr.smile.training.web.portlet.constants.AdvancedWebPortletKeys;
 		}
 )
 public class NextPageRenderCommand implements MVCRenderCommand {
+	
 	private final static Log LOGGER = LogFactoryUtil.getLog(NextPageRenderCommand.class);
 
 	@Override
