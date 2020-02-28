@@ -1,0 +1,3 @@
+Bundle-Name: hello-service
+Bundle-SymbolicName: fr.smile.training.liferay.service.hello.module
+Bundle-Version: 1.0.0
