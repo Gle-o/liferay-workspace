@@ -1,0 +1,10 @@
+Bundle-Name: announcement-api
+Bundle-SymbolicName: fr.smile.training.announcement.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	fr.smile.training.announcement.exception,\
+	fr.smile.training.announcement.model,\
+	fr.smile.training.announcement.service,\
+	fr.smile.training.announcement.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../announcement-service/service.xml
