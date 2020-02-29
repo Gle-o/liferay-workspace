@@ -37,6 +37,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Liferay
+ * Not working :(
  */
 @Component(
 	immediate = true,
