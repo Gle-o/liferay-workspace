@@ -33,6 +33,33 @@ public class FaqServiceWrapper
 		_faqService = faqService;
 	}
 
+	@Override
+	public fr.smile.training.faq.model.Faq addFaq(
+			long groupId, java.util.Map<java.util.Locale, String> title,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _faqService.addFaq(groupId, title, description, serviceContext);
+	}
+
+	@Override
+	public java.util.List<fr.smile.training.faq.model.Faq> getFaqsByKeywords(
+		long groupId, String keywords, int start, int end, int status,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<fr.smile.training.faq.model.Faq> orderByComparator) {
+
+		return _faqService.getFaqsByKeywords(
+			groupId, keywords, start, end, status, orderByComparator);
+	}
+
+	@Override
+	public long getFaqsCountByKeywords(
+		long groupId, String keywords, int status) {
+
+		return _faqService.getFaqsCountByKeywords(groupId, keywords, status);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

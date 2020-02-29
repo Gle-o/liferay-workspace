@@ -11,7 +11,6 @@ import org.osgi.service.component.annotations.Reference;
 import fr.smile.training.faq.model.Faq;
 import fr.smile.training.faq.model.FaqModel;
 import fr.smile.training.faq.service.FaqLocalService;
-import fr.smile.training.faq.service.FaqService;
 import fr.smile.training.faq.service.permission.FaqPermissionChecker;
 
 /**

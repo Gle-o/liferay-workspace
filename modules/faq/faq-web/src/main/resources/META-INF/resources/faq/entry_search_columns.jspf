@@ -48,7 +48,7 @@
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-jsp
-			path="/assignment/entry_actions.jsp" />
+			path="/faq/entry_actions.jsp" />
 	</c:when>
 
 	<%-- Card view  --%>

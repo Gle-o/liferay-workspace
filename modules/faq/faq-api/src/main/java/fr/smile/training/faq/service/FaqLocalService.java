@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -37,6 +38,8 @@ import fr.smile.training.faq.model.Faq;
 import java.io.Serializable;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -72,6 +75,23 @@ public interface FaqLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Faq addFaq(Faq faq);
+
+	/**
+	 * Adds an faq.
+	 *
+	 * @param groupId
+	 * @param titleMap
+	 * @param description
+	 * @param dueDate
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 */
+	@Indexable(type = IndexableType.REINDEX)
+	public Faq addFaq(
+			long groupId, Map<Locale, String> titleMap, String description,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Creates a new faq with the primary key. Does not add the faq to the database.
@@ -231,6 +251,27 @@ public interface FaqLocalService
 	public List<Faq> getFaqs(int start, int end);
 
 	/**
+	 * Gets faqs by keywords and status.
+	 *
+	 * This example uses dynamic queries.
+	 *
+	 * @param groupId
+	 * @param keywords
+	 * @param start
+	 * @param end
+	 * @param status
+	 * @param orderByComparator
+	 * @return
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Faq> getFaqsByKeywords(
+		long groupId, String keywords, int start, int end, int status,
+		OrderByComparator<Faq> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Faq> getFaqsByStatus(int status);
+
+	/**
 	 * Returns all the faqs matching the UUID and company.
 	 *
 	 * @param uuid the UUID of the faqs
@@ -262,6 +303,23 @@ public interface FaqLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getFaqsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getFaqsCountByGroupId(long groupId);
+
+	/**
+	 * Get faq count by keywords and status.
+	 *
+	 * This example uses dynamic queries.
+	 *
+	 * @param groupId
+	 * @param keywords
+	 * @param status
+	 * @return
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getFaqsCountByKeywords(
+		long groupId, String keywords, int status);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

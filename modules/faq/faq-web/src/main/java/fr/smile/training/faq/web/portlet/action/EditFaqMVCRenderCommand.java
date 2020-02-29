@@ -43,24 +43,24 @@ public class EditFaqMVCRenderCommand implements MVCRenderCommand {
 		RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		/*
+		
 		Faq faq = null;
 
 		long faqId = ParamUtil.getLong(renderRequest, "faqId", 0);
 
 		if (faqId > 0) {
-			try {
-				
-				// Call the service to get the faq for editing.
-				
-				faq = _faqService.getFaq(faqId);
-			}
-			catch (NoSuchFaqException e) {
-				_log.error(e);
-			}
-			catch (PortalException e) {
-				_log.error(e);
-			}
+//			try {
+//				
+//				// Call the service to get the faq for editing.
+//				
+//				faq = _faqService.getFaq(faqId);
+//			}
+//			catch (NoSuchFaqException e) {
+//				_log.error(e);
+//			}
+//			catch (PortalException e) {
+//				_log.error(e);
+//			}
 		}
 		
 		ThemeDisplay themeDisplay =
@@ -80,7 +80,7 @@ public class EditFaqMVCRenderCommand implements MVCRenderCommand {
 		
 		renderRequest.setAttribute("faq", faq);
 		renderRequest.setAttribute("faqClass", Faq.class);
-		*/
+
 		return "/faq/edit_faq.jsp";
 	}
 

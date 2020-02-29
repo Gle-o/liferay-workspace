@@ -14,11 +14,22 @@
 
 package fr.smile.training.faq.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
+
+import fr.smile.training.faq.service.FaqServiceUtil;
+
+import java.rmi.RemoteException;
+
+import java.util.Locale;
+import java.util.Map;
+
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Provides the SOAP utility for the
- * <code>fr.smile.training.faq.service.FaqServiceUtil</code> service
+ * <code>FaqServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -57,4 +68,67 @@ import org.osgi.annotation.versioning.ProviderType;
  */
 @ProviderType
 public class FaqServiceSoap {
+
+	public static fr.smile.training.faq.model.FaqSoap addFaq(
+			long groupId, String[] titleLanguageIds, String[] titleValues,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			Map<Locale, String> title = LocalizationUtil.getLocalizationMap(
+				titleLanguageIds, titleValues);
+
+			fr.smile.training.faq.model.Faq returnValue = FaqServiceUtil.addFaq(
+				groupId, title, description, serviceContext);
+
+			return fr.smile.training.faq.model.FaqSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static fr.smile.training.faq.model.FaqSoap[] getFaqsByKeywords(
+			long groupId, String keywords, int start, int end, int status,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<fr.smile.training.faq.model.Faq> orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List<fr.smile.training.faq.model.Faq> returnValue =
+				FaqServiceUtil.getFaqsByKeywords(
+					groupId, keywords, start, end, status, orderByComparator);
+
+			return fr.smile.training.faq.model.FaqSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getFaqsCountByKeywords(
+			long groupId, String keywords, int status)
+		throws RemoteException {
+
+		try {
+			long returnValue = FaqServiceUtil.getFaqsCountByKeywords(
+				groupId, keywords, status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(FaqServiceSoap.class);
+
 }

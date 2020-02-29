@@ -19,8 +19,17 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import fr.smile.training.faq.model.Faq;
+
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -47,6 +56,19 @@ public interface FaqService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link FaqServiceUtil} to access the faq remote service. Add custom service methods to <code>fr.smile.training.faq.service.impl.FaqServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public Faq addFaq(
+			long groupId, Map<Locale, String> title, String description,
+			ServiceContext serviceContext)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Faq> getFaqsByKeywords(
+		long groupId, String keywords, int start, int end, int status,
+		OrderByComparator<Faq> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getFaqsCountByKeywords(
+		long groupId, String keywords, int status);
 
 	/**
 	 * Returns the OSGi service identifier.

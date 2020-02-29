@@ -47,6 +47,28 @@ public class FaqLocalServiceWrapper
 	}
 
 	/**
+	 * Adds an faq.
+	 *
+	 * @param groupId
+	 * @param titleMap
+	 * @param description
+	 * @param dueDate
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 */
+	@Override
+	public fr.smile.training.faq.model.Faq addFaq(
+			long groupId, java.util.Map<java.util.Locale, String> titleMap,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _faqLocalService.addFaq(
+			groupId, titleMap, description, serviceContext);
+	}
+
+	/**
 	 * Creates a new faq with the primary key. Does not add the faq to the database.
 	 *
 	 * @param faqId the primary key for the new faq
@@ -269,6 +291,36 @@ public class FaqLocalServiceWrapper
 	}
 
 	/**
+	 * Gets faqs by keywords and status.
+	 *
+	 * This example uses dynamic queries.
+	 *
+	 * @param groupId
+	 * @param keywords
+	 * @param start
+	 * @param end
+	 * @param status
+	 * @param orderByComparator
+	 * @return
+	 */
+	@Override
+	public java.util.List<fr.smile.training.faq.model.Faq> getFaqsByKeywords(
+		long groupId, String keywords, int start, int end, int status,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<fr.smile.training.faq.model.Faq> orderByComparator) {
+
+		return _faqLocalService.getFaqsByKeywords(
+			groupId, keywords, start, end, status, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<fr.smile.training.faq.model.Faq> getFaqsByStatus(
+		int status) {
+
+		return _faqLocalService.getFaqsByStatus(status);
+	}
+
+	/**
 	 * Returns all the faqs matching the UUID and company.
 	 *
 	 * @param uuid the UUID of the faqs
@@ -311,6 +363,29 @@ public class FaqLocalServiceWrapper
 	@Override
 	public int getFaqsCount() {
 		return _faqLocalService.getFaqsCount();
+	}
+
+	@Override
+	public int getFaqsCountByGroupId(long groupId) {
+		return _faqLocalService.getFaqsCountByGroupId(groupId);
+	}
+
+	/**
+	 * Get faq count by keywords and status.
+	 *
+	 * This example uses dynamic queries.
+	 *
+	 * @param groupId
+	 * @param keywords
+	 * @param status
+	 * @return
+	 */
+	@Override
+	public long getFaqsCountByKeywords(
+		long groupId, String keywords, int status) {
+
+		return _faqLocalService.getFaqsCountByKeywords(
+			groupId, keywords, status);
 	}
 
 	@Override

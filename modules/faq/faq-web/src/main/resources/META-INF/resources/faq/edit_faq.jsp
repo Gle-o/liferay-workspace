@@ -34,6 +34,7 @@
 
 	<h1><liferay-ui:message key="${editTitle}" /></h1>
 
+	
 	<aui:model-context bean="${faq}" model="${faqClass}" />
 
 	<aui:form action="${faqActionURL}" name="fm" onSubmit="event.preventDefault();">
@@ -81,11 +82,6 @@
 					<aui:input name="description" type="hidden" />
 				</aui:field-wrapper>
 
-				<%-- Due date field. --%>
-
-				<aui:input name="dueDate">
-					<aui:validator name="required" />
-				</aui:input>
 			</aui:fieldset>
 		</aui:fieldset-group>
 		

@@ -69,7 +69,7 @@ public class FaqsManagementToolbarDisplayContext {
 
 		if (!_faqPermissionChecker.containsTopLevel(
 			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
-			"ADD_FAQ")) {
+			"ADD")) {
 
 			return null;
 		}

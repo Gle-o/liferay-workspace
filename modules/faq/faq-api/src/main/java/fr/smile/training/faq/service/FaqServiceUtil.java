@@ -39,6 +39,30 @@ public class FaqServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>fr.smile.training.faq.service.impl.FaqServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static fr.smile.training.faq.model.Faq addFaq(
+			long groupId, java.util.Map<java.util.Locale, String> title,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addFaq(groupId, title, description, serviceContext);
+	}
+
+	public static java.util.List<fr.smile.training.faq.model.Faq>
+		getFaqsByKeywords(
+			long groupId, String keywords, int start, int end, int status,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<fr.smile.training.faq.model.Faq> orderByComparator) {
+
+		return getService().getFaqsByKeywords(
+			groupId, keywords, start, end, status, orderByComparator);
+	}
+
+	public static long getFaqsCountByKeywords(
+		long groupId, String keywords, int status) {
+
+		return getService().getFaqsCountByKeywords(groupId, keywords, status);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.

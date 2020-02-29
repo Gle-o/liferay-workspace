@@ -39,21 +39,21 @@ import fr.smile.training.faq.web.display.context.FaqsManagementToolbarDisplayCon
  * @author liferay
  */
 @Component(
-	immediate = true,
-	property = {
-		"javax.portlet.name=" + FaqPortletKeys.FAQ,
-		"mvc.command.name=/",
-		"mvc.command.name=" + MVCCommandNames.VIEW_FAQS
-	},
-	service = MVCRenderCommand.class
-)
+		immediate = true,
+		property = {
+				"javax.portlet.name=" + FaqPortletKeys.FAQ,
+				"mvc.command.name=/",
+				"mvc.command.name=" + MVCCommandNames.VIEW_FAQS
+		},
+		service = MVCRenderCommand.class
+		)
 public class ViewFaqsMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
-		RenderRequest renderRequest, RenderResponse renderResponse)
-		throws PortletException {
-		
+			RenderRequest renderRequest, RenderResponse renderResponse)
+					throws PortletException {
+
 
 		// Add faq list related attributes.
 
@@ -66,7 +66,7 @@ public class ViewFaqsMVCRenderCommand implements MVCRenderCommand {
 		// Add permission checker
 
 		renderRequest.setAttribute(
-			"faqPermissionChecker", _faqPermissionChecker);
+				"faqPermissionChecker", _faqPermissionChecker);
 
 		// Add attributes needed by Application Display Templates renderer.
 
@@ -83,21 +83,21 @@ public class ViewFaqsMVCRenderCommand implements MVCRenderCommand {
 	private void addADTAttributes(RenderRequest renderRequest) {
 
 		ThemeDisplay themeDisplay =
-			(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 		renderRequest.setAttribute(
-			"faqClassName", Faq.class.getName());
+				"faqClassName", Faq.class.getName());
 
 		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
 		renderRequest.setAttribute(
-			"ADTdisplayStyle",
-			portletPreferences.getValue("displayStyle", StringPool.BLANK));
+				"ADTdisplayStyle",
+				portletPreferences.getValue("displayStyle", StringPool.BLANK));
 		renderRequest.setAttribute(
-			"ADTdisplayStyleGroupId",
-			GetterUtil.getLong(
-				portletPreferences.getValue("displayStyleGroupId", null),
-				themeDisplay.getScopeGroupId()));
+				"ADTdisplayStyleGroupId",
+				GetterUtil.getLong(
+						portletPreferences.getValue("displayStyleGroupId", null),
+						themeDisplay.getScopeGroupId()));
 
 	}
 
@@ -108,19 +108,19 @@ public class ViewFaqsMVCRenderCommand implements MVCRenderCommand {
 	 */
 	private void addFaqListAttributes(RenderRequest renderRequest) {
 
-		/*
+
 		ThemeDisplay themeDisplay =
-			(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 		// Resolve start and end for the search.
 
 		int currentPage = ParamUtil.getInteger(
-			renderRequest, SearchContainer.DEFAULT_CUR_PARAM,
-			SearchContainer.DEFAULT_CUR);
+				renderRequest, SearchContainer.DEFAULT_CUR_PARAM,
+				SearchContainer.DEFAULT_CUR);
 
 		int delta = ParamUtil.getInteger(
-			renderRequest, SearchContainer.DEFAULT_DELTA_PARAM,
-			SearchContainer.DEFAULT_DELTA);
+				renderRequest, SearchContainer.DEFAULT_DELTA_PARAM,
+				SearchContainer.DEFAULT_DELTA);
 
 		int start = ((currentPage > 0) ? (currentPage - 1) : 0) * delta;
 		int end = start + delta;
@@ -133,38 +133,38 @@ public class ViewFaqsMVCRenderCommand implements MVCRenderCommand {
 		// sort options.
 
 		String orderByCol =
-			ParamUtil.getString(renderRequest, "orderByCol", "title");
+				ParamUtil.getString(renderRequest, "orderByCol", "title");
 		String orderByType =
-			ParamUtil.getString(renderRequest, "orderByType", "asc");
+				ParamUtil.getString(renderRequest, "orderByType", "asc");
 
 		// Create comparator
 
 		OrderByComparator<Faq> comp =
-			OrderByComparatorFactoryUtil.create(
-				"Faq", orderByCol, !("asc").equals(orderByType));
+				OrderByComparatorFactoryUtil.create(
+						"Faq", orderByCol, !("asc").equals(orderByType));
 
 		// Get keywords.
 		// Notice that cleaning keywords is not implemented.
 
 		String keywords = ParamUtil.getString(renderRequest, "keywords");
-		
+
 		// Get the workflow status for the list.
-		
+
 		int status = getAllowedWorkflowStatus(renderRequest);
-		
+
 		// Call the service to get the list of faqs.
-		
+
 		List<Faq> assigments =
-			_faqService.getFaqByKeywords(
-				themeDisplay.getScopeGroupId(), keywords, start, end, status, comp);
+				_faqService.getFaqsByKeywords(
+						themeDisplay.getScopeGroupId(), keywords, start, end, status, comp);
 
 		// Set request attributes.
 
 		renderRequest.setAttribute("faqs", assigments);
 		renderRequest.setAttribute(
-			"faqCount", _faqService.getFaqsCountByKeywords(
-				themeDisplay.getScopeGroupId(), keywords, status));
-		*/
+				"faqCount", _faqService.getFaqsCountByKeywords(
+						themeDisplay.getScopeGroupId(), keywords, status));
+
 
 	}
 
@@ -175,26 +175,26 @@ public class ViewFaqsMVCRenderCommand implements MVCRenderCommand {
 	 * @param renderResponse
 	 */
 	private void addManagementToolbarAttributes(
-		RenderRequest renderRequest, RenderResponse renderResponse) {
+			RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		LiferayPortletRequest liferayPortletRequest =
-			_portal.getLiferayPortletRequest(renderRequest);
+				_portal.getLiferayPortletRequest(renderRequest);
 
 		LiferayPortletResponse liferayPortletResponse =
-			_portal.getLiferayPortletResponse(renderResponse);
+				_portal.getLiferayPortletResponse(renderResponse);
 
 		FaqsManagementToolbarDisplayContext faqsManagementToolbarDisplayContext =
-			new FaqsManagementToolbarDisplayContext(
-				liferayPortletRequest, liferayPortletResponse,
-				_portal.getHttpServletRequest(renderRequest),
-				_faqPermissionChecker);
+				new FaqsManagementToolbarDisplayContext(
+						liferayPortletRequest, liferayPortletResponse,
+						_portal.getHttpServletRequest(renderRequest),
+						_faqPermissionChecker);
 
 		renderRequest.setAttribute(
-			"faqsManagementToolbarDisplayContext",
-			faqsManagementToolbarDisplayContext);
+				"faqsManagementToolbarDisplayContext",
+				faqsManagementToolbarDisplayContext);
 
 	}
-	
+
 	/**
 	 * Returns workflow status current user is allowed to see.
 	 * 
@@ -207,18 +207,18 @@ public class ViewFaqsMVCRenderCommand implements MVCRenderCommand {
 	private int getAllowedWorkflowStatus(RenderRequest renderRequest) {
 
 		ThemeDisplay themeDisplay =
-			(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-		
+				(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
 		PermissionChecker  permissionChecker = themeDisplay.getPermissionChecker();
-		
+
 		int status;
-		
+
 		if (permissionChecker.isCompanyAdmin()) {
 			status = WorkflowConstants.STATUS_ANY;
 		} else {
 			status = WorkflowConstants.STATUS_APPROVED;
 		}
-		
+
 		return status;
 	}
 

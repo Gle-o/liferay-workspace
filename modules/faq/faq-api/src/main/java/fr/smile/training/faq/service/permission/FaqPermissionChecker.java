@@ -17,6 +17,8 @@ import fr.smile.training.faq.model.FaqModel;
 public interface FaqPermissionChecker
 	extends ModelResourcePermission<FaqModel> {
 	
+	public static final String ADD = "ADD";
+	
 	public static final String RESOURCE_NAME = Faq.class.getName();
 	
 	public static final String TOP_LEVEL_RESOURCE =
