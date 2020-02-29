@@ -21,7 +21,7 @@ import org.osgi.framework.Constants;
 import org.osgi.framework.FrameworkUtil;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @generated
  */
 public class FaqPersistenceConstants {

@@ -29,7 +29,7 @@ import org.osgi.annotation.versioning.ProviderType;
  * This class is a wrapper for {@link Faq}.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @see Faq
  * @generated
  */

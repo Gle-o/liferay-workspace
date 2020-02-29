@@ -13,34 +13,53 @@
  */
 package fr.smile.training.faq.exception;
 
-import org.osgi.annotation.versioning.ProviderType;
+import com.liferay.portal.kernel.exception.PortalException;
 
-import com.liferay.portal.kernel.exception.NoSuchModelException;
+import java.util.List;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * @author Brian Wing Shun Chan
  */
 @ProviderType
-public class NoSuchFaqException extends NoSuchModelException {
+public class FaqValidationException extends PortalException {
 
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public NoSuchFaqException() {
+	public FaqValidationException() {
 	}
 
-	public NoSuchFaqException(String msg) {
+	public FaqValidationException(String msg) {
 		super(msg);
 	}
 
-	public NoSuchFaqException(String msg, Throwable cause) {
+	public FaqValidationException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public NoSuchFaqException(Throwable cause) {
+	public FaqValidationException(Throwable cause) {
 		super(cause);
 	}
 
+	/**
+	 * Custom constructor taking error list
+	 * 
+	 * @param errors
+	 */
+	public FaqValidationException(List<String> errors) {
+
+		super(String.join(",", errors));
+		_errors = errors;
+	}
+
+	public List<String> getErrors() {
+
+		return _errors;
+	}
+
+	private List<String> _errors;
 }

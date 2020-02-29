@@ -5,6 +5,7 @@ Export-Package:\
 	fr.smile.training.faq.exception,\
 	fr.smile.training.faq.model,\
 	fr.smile.training.faq.service,\
-	fr.smile.training.faq.service.persistence
+	fr.smile.training.faq.service.persistence,\
+	fr.smile.training.faq.service.permission
 -check: EXPORTS
 -includeresource: META-INF/service.xml=../faq-service/service.xml

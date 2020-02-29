@@ -6,4 +6,6 @@ dependencies {
 	compileOnly group: "jstl", name: "jstl"
 	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
 	compileOnly project(":modules:faq:faq-api")
+	compileOnly 'com.liferay:com.liferay.frontend.taglib.clay'
+	compileOnly 'com.liferay:com.liferay.petra.function'
 }

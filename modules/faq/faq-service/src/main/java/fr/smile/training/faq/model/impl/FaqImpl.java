@@ -23,7 +23,7 @@ import org.osgi.annotation.versioning.ProviderType;
  * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>fr.smile.training.faq.model.Faq</code> interface.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  */
 @ProviderType
 public class FaqImpl extends FaqBaseImpl {

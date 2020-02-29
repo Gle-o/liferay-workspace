@@ -23,7 +23,7 @@ import org.osgi.annotation.versioning.ProviderType;
 /**
  * The extended model interface for the Faq service. Represents a row in the &quot;Faq_Faq&quot; database table, with each column mapped to a property of this class.
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @see FaqModel
  * @generated
  */

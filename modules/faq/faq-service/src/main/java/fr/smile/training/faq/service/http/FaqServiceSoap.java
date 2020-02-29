@@ -51,7 +51,7 @@ import org.osgi.annotation.versioning.ProviderType;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @see FaqServiceHttp
  * @generated
  */

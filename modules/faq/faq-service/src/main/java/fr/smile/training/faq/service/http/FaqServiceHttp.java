@@ -39,7 +39,7 @@ import org.osgi.annotation.versioning.ProviderType;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @see FaqServiceSoap
  * @generated
  */

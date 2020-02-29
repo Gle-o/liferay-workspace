@@ -38,7 +38,7 @@ import org.osgi.util.tracker.ServiceTracker;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @see FaqPersistence
  * @generated
  */
@@ -679,6 +679,72 @@ public class FaqUtil {
 	}
 
 	/**
+	 * Returns all the faqs that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching faqs that the user has permission to view
+	 */
+	public static List<Faq> filterFindByGroupId(long groupId) {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	/**
+	 * Returns a range of all the faqs that the user has permission to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>FaqModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of faqs
+	 * @param end the upper bound of the range of faqs (not inclusive)
+	 * @return the range of matching faqs that the user has permission to view
+	 */
+	public static List<Faq> filterFindByGroupId(
+		long groupId, int start, int end) {
+
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the faqs that the user has permissions to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>FaqModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of faqs
+	 * @param end the upper bound of the range of faqs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching faqs that the user has permission to view
+	 */
+	public static List<Faq> filterFindByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<Faq> orderByComparator) {
+
+		return getPersistence().filterFindByGroupId(
+			groupId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the faqs before and after the current faq in the ordered set of faqs that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param faqId the primary key of the current faq
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next faq
+	 * @throws NoSuchFaqException if a faq with the primary key could not be found
+	 */
+	public static Faq[] filterFindByGroupId_PrevAndNext(
+			long faqId, long groupId, OrderByComparator<Faq> orderByComparator)
+		throws fr.smile.training.faq.exception.NoSuchFaqException {
+
+		return getPersistence().filterFindByGroupId_PrevAndNext(
+			faqId, groupId, orderByComparator);
+	}
+
+	/**
 	 * Removes all the faqs where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
@@ -695,6 +761,16 @@ public class FaqUtil {
 	 */
 	public static int countByGroupId(long groupId) {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	/**
+	 * Returns the number of faqs that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching faqs that the user has permission to view
+	 */
+	public static int filterCountByGroupId(long groupId) {
+		return getPersistence().filterCountByGroupId(groupId);
 	}
 
 	/**
@@ -1021,6 +1097,77 @@ public class FaqUtil {
 	}
 
 	/**
+	 * Returns all the faqs that the user has permission to view where status = &#63; and groupId = &#63;.
+	 *
+	 * @param status the status
+	 * @param groupId the group ID
+	 * @return the matching faqs that the user has permission to view
+	 */
+	public static List<Faq> filterFindByG_S(int status, long groupId) {
+		return getPersistence().filterFindByG_S(status, groupId);
+	}
+
+	/**
+	 * Returns a range of all the faqs that the user has permission to view where status = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>FaqModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of faqs
+	 * @param end the upper bound of the range of faqs (not inclusive)
+	 * @return the range of matching faqs that the user has permission to view
+	 */
+	public static List<Faq> filterFindByG_S(
+		int status, long groupId, int start, int end) {
+
+		return getPersistence().filterFindByG_S(status, groupId, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the faqs that the user has permissions to view where status = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>FaqModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of faqs
+	 * @param end the upper bound of the range of faqs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching faqs that the user has permission to view
+	 */
+	public static List<Faq> filterFindByG_S(
+		int status, long groupId, int start, int end,
+		OrderByComparator<Faq> orderByComparator) {
+
+		return getPersistence().filterFindByG_S(
+			status, groupId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the faqs before and after the current faq in the ordered set of faqs that the user has permission to view where status = &#63; and groupId = &#63;.
+	 *
+	 * @param faqId the primary key of the current faq
+	 * @param status the status
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next faq
+	 * @throws NoSuchFaqException if a faq with the primary key could not be found
+	 */
+	public static Faq[] filterFindByG_S_PrevAndNext(
+			long faqId, int status, long groupId,
+			OrderByComparator<Faq> orderByComparator)
+		throws fr.smile.training.faq.exception.NoSuchFaqException {
+
+		return getPersistence().filterFindByG_S_PrevAndNext(
+			faqId, status, groupId, orderByComparator);
+	}
+
+	/**
 	 * Removes all the faqs where status = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param status the status
@@ -1039,6 +1186,17 @@ public class FaqUtil {
 	 */
 	public static int countByG_S(int status, long groupId) {
 		return getPersistence().countByG_S(status, groupId);
+	}
+
+	/**
+	 * Returns the number of faqs that the user has permission to view where status = &#63; and groupId = &#63;.
+	 *
+	 * @param status the status
+	 * @param groupId the group ID
+	 * @return the number of matching faqs that the user has permission to view
+	 */
+	public static int filterCountByG_S(int status, long groupId) {
+		return getPersistence().filterCountByG_S(status, groupId);
 	}
 
 	/**

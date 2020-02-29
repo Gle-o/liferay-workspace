@@ -32,7 +32,7 @@ import org.osgi.annotation.versioning.ProviderType;
 /**
  * The cache model class for representing Faq in entity cache.
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @generated
  */
 @ProviderType

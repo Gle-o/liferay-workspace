@@ -25,7 +25,7 @@ import org.osgi.annotation.versioning.ProviderType;
 /**
  * This class is used by SOAP remote services, specifically {@link fr.smile.training.faq.service.http.FaqServiceSoap}.
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @generated
  */
 @ProviderType

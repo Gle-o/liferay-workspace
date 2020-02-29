@@ -30,7 +30,7 @@ import org.osgi.service.component.annotations.Component;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @see FaqLocalServiceBaseImpl
  */
 @Component(

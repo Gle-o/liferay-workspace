@@ -21,7 +21,7 @@ import org.osgi.annotation.versioning.ProviderType;
 /**
  * Provides a wrapper for {@link FaqLocalService}.
  *
- * @author Brian Wing Shun Chan
+ * @author Guillaume Lenoir
  * @see FaqLocalService
  * @generated
  */
