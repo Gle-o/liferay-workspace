@@ -10,6 +10,9 @@ dependencies {
 	compileOnly group: "javax.portlet", name: "portlet-api"
 	
 	compileOnly 'com.liferay:com.liferay.portal.spring.extender.api'
+	
+    compileOnly group: "com.liferay", name: "com.liferay.portal.search.spi"
+    compileOnly group: "com.liferay", name: "com.liferay.portal.search.api"
 	compileOnly project(":modules:faq:faq-api")
 	
 }
