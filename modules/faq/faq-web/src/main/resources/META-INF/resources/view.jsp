@@ -34,12 +34,11 @@ stateAwareResponse
 <%-- Application display template renderer. 
      Contents of this tag can be overridden by your custom application display template. --%>
 
-
-<%-- <liferay-ddm:template-renderer 
-	className="${assignmentClassName}"
+<liferay-ddm:template-renderer
+	className="${faqClassName}"
 	displayStyle="${ADTdisplayStyle}"
 	displayStyleGroupId="${ADTdisplayStyleGroupId}" 
-	entries="${assignments}"> --%>
+	entries="${faqs}">
 
 	<div class="container-fluid-1280">
 	
@@ -86,6 +85,5 @@ stateAwareResponse
 				markupView="lexicon" 
 			/>
 		</liferay-ui:search-container>
-	</div>
-<%-- 
-</liferay-ddm:template-renderer> --%>
+	</div> 
+</liferay-ddm:template-renderer>

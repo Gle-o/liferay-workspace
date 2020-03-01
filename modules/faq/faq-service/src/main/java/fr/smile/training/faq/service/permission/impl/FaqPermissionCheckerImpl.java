@@ -14,7 +14,7 @@ import fr.smile.training.faq.service.FaqLocalService;
 import fr.smile.training.faq.service.permission.FaqPermissionChecker;
 
 /**
- * Gradebook permission checker implementation.
+ * Faq permission checker implementation.
  * 
  * @author guillaume lenoir
  *

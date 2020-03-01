@@ -9,9 +9,9 @@ import fr.smile.training.faq.model.Faq;
 import fr.smile.training.faq.model.FaqModel;
 
 /**
- * Gradebook assignments permission checker interface.
+ * Faq assignments permission checker interface.
  * 
- * @author liferay
+ * @author Guillaume Lenoir
  *
  */
 public interface FaqPermissionChecker

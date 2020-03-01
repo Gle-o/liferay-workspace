@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<root>
+	<template>
+		<template-key>faq-example-ftl</template-key>
+		<name>faq-example-template</name>
+		<description>This is an Application Display Template example for the Faq exercise. You can find this template in the faq-web/src/main/resources folder.</description>
+		<language>ftl</language>
+		<script-file>fr/smile/training/faq/web/template/portlet_display_template.ftl</script-file>
+		<cacheable>false</cacheable>
+	</template>
+</root>

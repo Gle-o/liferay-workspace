@@ -11,7 +11,7 @@
 
 <%@ taglib prefix="aui" uri="http://liferay.com/tld/aui" %>
 <%@ taglib prefix="clay" uri="http://liferay.com/tld/clay" %>
-<%@ taglib prefix="liferay-ddm" uri="http://liferay.com/tld/ddm" %>
+<%@ taglib uri="http://liferay.com/tld/ddm" prefix="liferay-ddm" %>
 <%@ taglib prefix="liferay-item-selector" uri="http://liferay.com/tld/item-selector" %>
 <%@ taglib prefix="liferay-frontend" uri="http://liferay.com/tld/frontend" %>
 <%@ taglib prefix="liferay-portlet" uri="http://liferay.com/tld/portlet" %>

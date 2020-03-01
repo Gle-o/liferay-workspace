@@ -11,4 +11,6 @@ dependencies {
 	compileOnly 'com.liferay:com.liferay.asset.api'
 	compileOnly 'javax.portlet:portlet-api'
 	compileOnly 'com.liferay:com.liferay.asset.display.page.api'
+	compileOnly 'com.liferay:com.liferay.dynamic.data.mapping.taglib'
+	
 }
