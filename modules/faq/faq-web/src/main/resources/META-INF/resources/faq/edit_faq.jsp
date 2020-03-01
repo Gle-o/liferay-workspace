@@ -30,6 +30,9 @@
 <liferay-ui:error key="error.faq-description-empty" message="error.faq-description-empty" />
 <liferay-ui:error key="error.faq-date-empty" message="error.faq-date-empty" />
 
+<liferay-asset:asset-categories-error />
+<liferay-asset:asset-tags-error />
+
 <div class="container-fluid-1280 edit-faq">
 
 	<h1><liferay-ui:message key="${editTitle}" /></h1>
@@ -83,6 +86,19 @@
 				</aui:field-wrapper>
 
 			</aui:fieldset>
+			
+			<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="categorization">
+		        
+		        <liferay-asset:asset-categories-selector
+					className="<%= Faq.class.getName() %>"
+					classPK="${faq!=null? faq.faqId:0}"
+				/>
+				
+				<liferay-asset:asset-tags-selector
+					className="<%= Faq.class.getName() %>"
+					classPK="${faq!=null? faq.faqId:0}"
+				/>
+		    </aui:fieldset>
 		</aui:fieldset-group>
 		
 		<%--Buttons. --%>

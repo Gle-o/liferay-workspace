@@ -18,6 +18,7 @@
 <%@ taglib prefix="liferay-security" uri="http://liferay.com/tld/security" %>
 <%@ taglib prefix="liferay-theme" uri="http://liferay.com/tld/theme" %>
 <%@ taglib prefix="liferay-ui" uri="http://liferay.com/tld/ui" %>
+<%@ taglib uri="http://liferay.com/tld/asset" prefix="liferay-asset" %>
 
 <%@ page import="java.util.Date"%>
 

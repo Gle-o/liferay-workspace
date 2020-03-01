@@ -27,7 +27,7 @@
 
 <%@ page import="fr.smile.training.faq.model.Faq"%>
 <%@ page import="fr.smile.training.faq.web.constants.MVCCommandNames"%>
-
+<%@ taglib uri="http://liferay.com/tld/asset" prefix="liferay-asset" %>
 
 <liferay-frontend:defineObjects />
 
@@ -47,6 +47,34 @@
 	<h3 class="title"><%= HtmlUtil.escape(faq.getTitle(locale)) %></h3>
 </aui:a>
 
+<liferay-asset:asset-categories-available
+    className="<%= Faq.class.getName() %>"
+    classPK="<%= faq.getFaqId() %>"
+>
+    <div class="entry-categories">
+        <liferay-asset:asset-categories-summary
+            className="<%= Faq.class.getName() %>"
+            classPK="<%= faq.getFaqId() %>"
+            portletURL="<%= renderResponse.createRenderURL() %>"
+        />
+    </div>
+</liferay-asset:asset-categories-available>
+
+
+<liferay-asset:asset-tags-available
+    className="<%= Faq.class.getName() %>"
+    classPK="<%= faq.getFaqId() %>"
+>
+    <div class="entry-tags">
+        <liferay-asset:asset-tags-summary
+            className="<%= Faq.class.getName() %>"
+            classPK="<%= faq.getFaqId() %>"
+            portletURL="<%= renderResponse.createRenderURL() %>"
+        />
+    </div>
+</liferay-asset:asset-tags-available>
+
 <div class="autofit-col autofit-col-expand">
-	${assignment.getDescription()}
+	${faq.getDescription()}
 </div>
+
