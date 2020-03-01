@@ -129,6 +129,45 @@ public class FaqServiceSoap {
 		}
 	}
 
+	public static fr.smile.training.faq.model.FaqSoap getFaq(long faqId)
+		throws RemoteException {
+
+		try {
+			fr.smile.training.faq.model.Faq returnValue = FaqServiceUtil.getFaq(
+				faqId);
+
+			return fr.smile.training.faq.model.FaqSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static fr.smile.training.faq.model.FaqSoap updateFaq(
+			long faqId, String[] titleMapLanguageIds, String[] titleMapValues,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+				titleMapLanguageIds, titleMapValues);
+
+			fr.smile.training.faq.model.Faq returnValue =
+				FaqServiceUtil.updateFaq(
+					faqId, titleMap, description, serviceContext);
+
+			return fr.smile.training.faq.model.FaqSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FaqServiceSoap.class);
 
 }

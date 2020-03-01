@@ -25,13 +25,19 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.sanitizer.Sanitizer;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
+import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
+import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -4024,6 +4030,31 @@ public class FaqPersistenceImpl
 			}
 			else {
 				faq.setModifiedDate(serviceContext.getModifiedDate(now));
+			}
+		}
+
+		long userId = GetterUtil.getLong(PrincipalThreadLocal.getName());
+
+		if (userId > 0) {
+			long companyId = faq.getCompanyId();
+
+			long groupId = faq.getGroupId();
+
+			long faqId = 0;
+
+			if (!isNew) {
+				faqId = faq.getPrimaryKey();
+			}
+
+			try {
+				faq.setDescription(
+					SanitizerUtil.sanitize(
+						companyId, groupId, userId, Faq.class.getName(), faqId,
+						ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL,
+						faq.getDescription(), null));
+			}
+			catch (SanitizerException se) {
+				throw new SystemException(se);
 			}
 		}
 

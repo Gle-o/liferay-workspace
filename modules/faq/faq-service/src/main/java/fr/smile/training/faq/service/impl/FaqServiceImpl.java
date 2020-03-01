@@ -16,6 +16,7 @@ package fr.smile.training.faq.service.impl;
 
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -63,7 +64,6 @@ public class FaqServiceImpl extends FaqServiceBaseImpl {
 	public Faq addFaq(long groupId, Map<Locale, String> title, String description, ServiceContext serviceContext) throws PortalException {
 
 		// Check permissions
-		
 		_faqPermissionChecker.checkTopLevel(
 				getPermissionChecker(), serviceContext.getScopeGroupId(),
 				FaqPermissionCheckerImpl.ADD);
@@ -77,6 +77,30 @@ public class FaqServiceImpl extends FaqServiceBaseImpl {
 	
 	public long getFaqsCountByKeywords(long groupId, String keywords, int status) {
 		return faqLocalService.getFaqsCountByKeywords(groupId, keywords, status);
+	}
+	
+	public Faq getFaq(long faqId) throws PortalException {	
+		Faq faq = faqLocalService.getFaq(faqId);
+		
+		// Check permissions.
+		_faqPermissionChecker.check(
+			getPermissionChecker(), faq.getGroupId(),
+			faq.getFaqId(), ActionKeys.VIEW);	
+	
+		return faq;
+	}
+	
+	public Faq updateFaq(long faqId, Map<Locale, String> titleMap, String description, ServiceContext serviceContext) throws PortalException {
+
+		Faq faq = faqLocalService.getFaq(faqId);
+				
+		// Check permissions.
+		
+		_faqPermissionChecker.check(
+				getPermissionChecker(), faq.getGroupId(),
+				faq.getFaqId(), ActionKeys.UPDATE);
+		
+		return faqLocalService.updateFaq(faqId, titleMap, description, serviceContext);
 	}
 	
 	@Reference(

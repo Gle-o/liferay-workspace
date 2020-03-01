@@ -48,6 +48,12 @@ public class FaqServiceUtil {
 		return getService().addFaq(groupId, title, description, serviceContext);
 	}
 
+	public static fr.smile.training.faq.model.Faq getFaq(long faqId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getFaq(faqId);
+	}
+
 	public static java.util.List<fr.smile.training.faq.model.Faq>
 		getFaqsByKeywords(
 			long groupId, String keywords, int start, int end, int status,
@@ -71,6 +77,16 @@ public class FaqServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static fr.smile.training.faq.model.Faq updateFaq(
+			long faqId, java.util.Map<java.util.Locale, String> titleMap,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateFaq(
+			faqId, titleMap, description, serviceContext);
 	}
 
 	public static FaqService getService() {

@@ -52,7 +52,6 @@ public class EditFaqMVCActionCommand extends BaseMVCActionCommand {
 		ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		/*
 		ServiceContext serviceContext =
 			ServiceContextFactory.getInstance(Faq.class.getName(), actionRequest);
 
@@ -69,16 +68,15 @@ public class EditFaqMVCActionCommand extends BaseMVCActionCommand {
 
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		Date dueDate = ParamUtil.getDate(
-			actionRequest, "dueDate",
-			DateFormatFactoryUtil.getDate(actionRequest.getLocale()));
+//		Date dueDate = ParamUtil.getDate(
+//			actionRequest, "dueDate",
+//			DateFormatFactoryUtil.getDate(actionRequest.getLocale()));
 		
 		try {
 			
 			// Call the service to update the faq
-			
 			_faqService.updateFaq(
-				faqId, title, description, dueDate, serviceContext);
+				faqId, title, description, serviceContext);
 
 			// Set success message.
 			
@@ -112,7 +110,6 @@ public class EditFaqMVCActionCommand extends BaseMVCActionCommand {
 			actionResponse.getRenderParameters().setValue(
 				"mvcRenderCommandName", MVCCommandNames.EDIT_FAQ);			
 		}
-		*/
 	}
 
 	@Reference

@@ -44,6 +44,13 @@ public class FaqServiceWrapper
 	}
 
 	@Override
+	public fr.smile.training.faq.model.Faq getFaq(long faqId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _faqService.getFaq(faqId);
+	}
+
+	@Override
 	public java.util.List<fr.smile.training.faq.model.Faq> getFaqsByKeywords(
 		long groupId, String keywords, int start, int end, int status,
 		com.liferay.portal.kernel.util.OrderByComparator
@@ -68,6 +75,17 @@ public class FaqServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _faqService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public fr.smile.training.faq.model.Faq updateFaq(
+			long faqId, java.util.Map<java.util.Locale, String> titleMap,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _faqService.updateFaq(
+			faqId, titleMap, description, serviceContext);
 	}
 
 	@Override

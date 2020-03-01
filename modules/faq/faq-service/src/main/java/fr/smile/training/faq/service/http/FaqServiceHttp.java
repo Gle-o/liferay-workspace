@@ -160,6 +160,82 @@ public class FaqServiceHttp {
 		}
 	}
 
+	public static fr.smile.training.faq.model.Faq getFaq(
+			HttpPrincipal httpPrincipal, long faqId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				FaqServiceUtil.class, "getFaq", _getFaqParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, faqId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (fr.smile.training.faq.model.Faq)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static fr.smile.training.faq.model.Faq updateFaq(
+			HttpPrincipal httpPrincipal, long faqId,
+			java.util.Map<java.util.Locale, String> titleMap,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				FaqServiceUtil.class, "updateFaq", _updateFaqParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, faqId, titleMap, description, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (fr.smile.training.faq.model.Faq)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FaqServiceHttp.class);
 
 	private static final Class<?>[] _addFaqParameterTypes0 = new Class[] {
@@ -173,5 +249,12 @@ public class FaqServiceHttp {
 		};
 	private static final Class<?>[] _getFaqsCountByKeywordsParameterTypes2 =
 		new Class[] {long.class, String.class, int.class};
+	private static final Class<?>[] _getFaqParameterTypes3 = new Class[] {
+		long.class
+	};
+	private static final Class<?>[] _updateFaqParameterTypes4 = new Class[] {
+		long.class, java.util.Map.class, String.class,
+		com.liferay.portal.kernel.service.ServiceContext.class
+	};
 
 }

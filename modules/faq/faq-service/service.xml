@@ -36,6 +36,13 @@
 		<column name="answer" type="String" localized="true" />
 		<column name="description" type="String" />
 
+		<!--
+		The uad-nonanonymizable value specifies whether the column represents data
+		associated with a specific user that should be reviewed by an administrator in
+		the event of a GDPR compliance request. This implies the data cannot be
+		anonymized automatically.
+		-->
+
 		<!-- Order -->
 
 		<order by="asc">

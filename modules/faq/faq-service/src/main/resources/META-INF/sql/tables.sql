@@ -14,5 +14,5 @@ create table Faq_Faq (
 	title STRING null,
 	question STRING null,
 	answer STRING null,
-	description VARCHAR(75) null
+	description TEXT null
 );

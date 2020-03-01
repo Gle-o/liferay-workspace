@@ -406,6 +406,27 @@ public class FaqLocalServiceUtil {
 		return getService().updateFaq(faq);
 	}
 
+	/**
+	 * Updates faq.
+	 *
+	 * @param faqId
+	 * @param titleMap
+	 * @param description
+	 * @param dueDate
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 */
+	public static fr.smile.training.faq.model.Faq updateFaq(
+			long faqId, java.util.Map<java.util.Locale, String> titleMap,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateFaq(
+			faqId, titleMap, description, serviceContext);
+	}
+
 	public static FaqLocalService getService() {
 		return _serviceTracker.getService();
 	}

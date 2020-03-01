@@ -149,6 +149,44 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	}
 	
 	/**
+	 * Updates faq.
+	 * 
+	 * @param faqId
+	 * @param titleMap
+	 * @param description
+	 * @param dueDate
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 */
+	@Indexable(
+		type = IndexableType.REINDEX
+	)
+	public Faq updateFaq(
+		long faqId, Map<Locale, String> titleMap, String description, ServiceContext serviceContext)
+		throws PortalException {
+
+		// Validate faq values
+		FaqValidator.validate(titleMap, description);
+
+		// Get Faq
+
+		Faq faq = getFaq(faqId);
+
+		// Update the changes to faq
+
+		faq.setModifiedDate(new Date());
+		faq.setTitleMap(titleMap);
+		faq.setDescription(description);
+
+		faq = super.updateFaq(faq);
+
+//		updateAsset(faq, serviceContext);
+
+		return faq;
+	}
+	
+	/**
 	 * Gets faqs by keywords and status.
 	 * 
 	 * This example uses dynamic queries.

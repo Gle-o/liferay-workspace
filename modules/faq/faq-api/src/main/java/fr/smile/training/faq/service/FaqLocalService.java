@@ -345,4 +345,21 @@ public interface FaqLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Faq updateFaq(Faq faq);
 
+	/**
+	 * Updates faq.
+	 *
+	 * @param faqId
+	 * @param titleMap
+	 * @param description
+	 * @param dueDate
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 */
+	@Indexable(type = IndexableType.REINDEX)
+	public Faq updateFaq(
+			long faqId, Map<Locale, String> titleMap, String description,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 }

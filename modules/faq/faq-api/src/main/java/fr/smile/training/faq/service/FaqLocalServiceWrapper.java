@@ -426,6 +426,28 @@ public class FaqLocalServiceWrapper
 		return _faqLocalService.updateFaq(faq);
 	}
 
+	/**
+	 * Updates faq.
+	 *
+	 * @param faqId
+	 * @param titleMap
+	 * @param description
+	 * @param dueDate
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 */
+	@Override
+	public fr.smile.training.faq.model.Faq updateFaq(
+			long faqId, java.util.Map<java.util.Locale, String> titleMap,
+			String description,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _faqLocalService.updateFaq(
+			faqId, titleMap, description, serviceContext);
+	}
+
 	@Override
 	public FaqLocalService getWrappedService() {
 		return _faqLocalService;

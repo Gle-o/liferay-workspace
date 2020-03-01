@@ -92,7 +92,7 @@ public class FaqModelImpl extends BaseModelImpl<Faq> implements FaqModel {
 		{"status", Types.INTEGER}, {"statusByUserId", Types.BIGINT},
 		{"statusByUserName", Types.VARCHAR}, {"statusDate", Types.TIMESTAMP},
 		{"title", Types.VARCHAR}, {"question", Types.VARCHAR},
-		{"answer", Types.VARCHAR}, {"description", Types.VARCHAR}
+		{"answer", Types.VARCHAR}, {"description", Types.CLOB}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -114,11 +114,11 @@ public class FaqModelImpl extends BaseModelImpl<Faq> implements FaqModel {
 		TABLE_COLUMNS_MAP.put("title", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("question", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("answer", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("description", Types.CLOB);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Faq_Faq (uuid_ VARCHAR(75) null,faqId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,title STRING null,question STRING null,answer STRING null,description VARCHAR(75) null)";
+		"create table Faq_Faq (uuid_ VARCHAR(75) null,faqId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,title STRING null,question STRING null,answer STRING null,description TEXT null)";
 
 	public static final String TABLE_SQL_DROP = "drop table Faq_Faq";
 

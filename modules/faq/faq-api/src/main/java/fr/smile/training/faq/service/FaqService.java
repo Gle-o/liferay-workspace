@@ -62,6 +62,9 @@ public interface FaqService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Faq getFaq(long faqId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Faq> getFaqsByKeywords(
 		long groupId, String keywords, int start, int end, int status,
 		OrderByComparator<Faq> orderByComparator);
@@ -76,5 +79,10 @@ public interface FaqService extends BaseService {
 	 * @return the OSGi service identifier
 	 */
 	public String getOSGiServiceIdentifier();
+
+	public Faq updateFaq(
+			long faqId, Map<Locale, String> titleMap, String description,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 }
