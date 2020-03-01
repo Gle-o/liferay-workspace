@@ -17,7 +17,6 @@
 		<field localized="true" name="title" type="String" />
 		<field localized="true" name="question" type="String" />
 		<field localized="true" name="answer" type="String" />
-		<!--  Possibility to change data range see hibernate documentation-->
 		<field name="description" type="String">
 			<hint-collection name="CLOB" />
 			<sanitize content-type="text/html" modes="ALL" />

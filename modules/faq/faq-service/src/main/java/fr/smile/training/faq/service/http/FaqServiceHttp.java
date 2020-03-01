@@ -196,6 +196,42 @@ public class FaqServiceHttp {
 		}
 	}
 
+	public static fr.smile.training.faq.model.Faq deleteFaq(
+			HttpPrincipal httpPrincipal, long faqId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				FaqServiceUtil.class, "deleteFaq", _deleteFaqParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, faqId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (fr.smile.training.faq.model.Faq)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static fr.smile.training.faq.model.Faq updateFaq(
 			HttpPrincipal httpPrincipal, long faqId,
 			java.util.Map<java.util.Locale, String> titleMap,
@@ -205,7 +241,7 @@ public class FaqServiceHttp {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				FaqServiceUtil.class, "updateFaq", _updateFaqParameterTypes4);
+				FaqServiceUtil.class, "updateFaq", _updateFaqParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, faqId, titleMap, description, serviceContext);
@@ -252,7 +288,10 @@ public class FaqServiceHttp {
 	private static final Class<?>[] _getFaqParameterTypes3 = new Class[] {
 		long.class
 	};
-	private static final Class<?>[] _updateFaqParameterTypes4 = new Class[] {
+	private static final Class<?>[] _deleteFaqParameterTypes4 = new Class[] {
+		long.class
+	};
+	private static final Class<?>[] _updateFaqParameterTypes5 = new Class[] {
 		long.class, java.util.Map.class, String.class,
 		com.liferay.portal.kernel.service.ServiceContext.class
 	};

@@ -90,6 +90,19 @@ public class FaqServiceImpl extends FaqServiceBaseImpl {
 		return faq;
 	}
 	
+	public Faq deleteFaq(long faqId) throws PortalException {
+		Faq faq = faqLocalService.getFaq(faqId);
+		
+		// Check permissions.
+		
+		_faqPermissionChecker.check(
+				getPermissionChecker(), faq.getGroupId(),
+				faq.getFaqId(), ActionKeys.DELETE);
+		
+		return faqLocalService.deleteFaq(faq);
+	}
+	
+	
 	public Faq updateFaq(long faqId, Map<Locale, String> titleMap, String description, ServiceContext serviceContext) throws PortalException {
 
 		Faq faq = faqLocalService.getFaq(faqId);

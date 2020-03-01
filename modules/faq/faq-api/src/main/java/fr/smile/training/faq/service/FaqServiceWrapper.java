@@ -44,6 +44,13 @@ public class FaqServiceWrapper
 	}
 
 	@Override
+	public fr.smile.training.faq.model.Faq deleteFaq(long faqId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _faqService.deleteFaq(faqId);
+	}
+
+	@Override
 	public fr.smile.training.faq.model.Faq getFaq(long faqId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 

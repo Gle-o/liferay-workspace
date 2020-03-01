@@ -61,6 +61,8 @@ public interface FaqService extends BaseService {
 			ServiceContext serviceContext)
 		throws PortalException;
 
+	public Faq deleteFaq(long faqId) throws PortalException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Faq getFaq(long faqId) throws PortalException;
 

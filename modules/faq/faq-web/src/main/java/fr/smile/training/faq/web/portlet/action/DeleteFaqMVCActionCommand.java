@@ -40,9 +40,7 @@ public class DeleteFaqMVCActionCommand extends BaseMVCActionCommand {
 		ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		/*
 		// Get faq id from request.
-
 		long faqId = ParamUtil.getLong(actionRequest, "faqId");
 
 		if (_log.isDebugEnabled()) {
@@ -52,11 +50,9 @@ public class DeleteFaqMVCActionCommand extends BaseMVCActionCommand {
 		try {
 
 			// Call service to delete the faq.
-
 			_faqService.deleteFaq(faqId);
 
 			// Set success message.
-
 			SessionMessages.add(actionRequest, "faq-deleted");
 
 		}
@@ -68,8 +64,6 @@ public class DeleteFaqMVCActionCommand extends BaseMVCActionCommand {
 
 			_log.error(e);
 		}
-		*/
-
 	}
 
 	@Reference

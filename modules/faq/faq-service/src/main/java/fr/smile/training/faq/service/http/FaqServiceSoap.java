@@ -145,6 +145,22 @@ public class FaqServiceSoap {
 		}
 	}
 
+	public static fr.smile.training.faq.model.FaqSoap deleteFaq(long faqId)
+		throws RemoteException {
+
+		try {
+			fr.smile.training.faq.model.Faq returnValue =
+				FaqServiceUtil.deleteFaq(faqId);
+
+			return fr.smile.training.faq.model.FaqSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static fr.smile.training.faq.model.FaqSoap updateFaq(
 			long faqId, String[] titleMapLanguageIds, String[] titleMapValues,
 			String description,

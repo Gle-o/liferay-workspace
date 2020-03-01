@@ -48,6 +48,12 @@ public class FaqServiceUtil {
 		return getService().addFaq(groupId, title, description, serviceContext);
 	}
 
+	public static fr.smile.training.faq.model.Faq deleteFaq(long faqId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().deleteFaq(faqId);
+	}
+
 	public static fr.smile.training.faq.model.Faq getFaq(long faqId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
