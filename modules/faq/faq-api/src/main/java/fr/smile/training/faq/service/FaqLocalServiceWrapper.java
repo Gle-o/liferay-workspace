@@ -448,6 +448,28 @@ public class FaqLocalServiceWrapper
 			faqId, titleMap, description, serviceContext);
 	}
 
+	/**
+	 * Updates model's workflow status.
+	 *
+	 * @param userId
+	 * @param faqId
+	 * @param status
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	@Override
+	public fr.smile.training.faq.model.Faq updateStatus(
+			long userId, long faqId, int status,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			   com.liferay.portal.kernel.exception.SystemException {
+
+		return _faqLocalService.updateStatus(
+			userId, faqId, status, serviceContext);
+	}
+
 	@Override
 	public FaqLocalService getWrappedService() {
 		return _faqLocalService;

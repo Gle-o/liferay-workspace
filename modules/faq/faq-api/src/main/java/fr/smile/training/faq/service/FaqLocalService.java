@@ -362,4 +362,19 @@ public interface FaqLocalService
 			ServiceContext serviceContext)
 		throws PortalException;
 
+	/**
+	 * Updates model's workflow status.
+	 *
+	 * @param userId
+	 * @param faqId
+	 * @param status
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	public Faq updateStatus(
+			long userId, long faqId, int status, ServiceContext serviceContext)
+		throws PortalException, SystemException;
+
 }

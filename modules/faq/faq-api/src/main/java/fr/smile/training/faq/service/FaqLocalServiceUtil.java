@@ -427,6 +427,26 @@ public class FaqLocalServiceUtil {
 			faqId, titleMap, description, serviceContext);
 	}
 
+	/**
+	 * Updates model's workflow status.
+	 *
+	 * @param userId
+	 * @param faqId
+	 * @param status
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	public static fr.smile.training.faq.model.Faq updateStatus(
+			long userId, long faqId, int status,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			   com.liferay.portal.kernel.exception.SystemException {
+
+		return getService().updateStatus(userId, faqId, status, serviceContext);
+	}
+
 	public static FaqLocalService getService() {
 		return _serviceTracker.getService();
 	}

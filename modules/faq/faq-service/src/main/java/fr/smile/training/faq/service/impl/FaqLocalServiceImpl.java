@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.orm.Disjunction;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexable;
@@ -27,8 +28,11 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -99,7 +103,7 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 		long faqId =
 			counterLocalService.increment(Faq.class.getName());
 
-		// Create assigment.
+		// Create faq.
 
 		Faq faq = createFaq(faqId);
 
@@ -134,17 +138,91 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 			faq.getFaqId(), portletActions, addGroupPermissions,
 			addGuestPermissions);
 
-		/*
+		
 		// Update asset.
 
-		updateAsset(faq, serviceContext);
+		// updateAsset(faq, serviceContext);
 
 		// Start workflow instance and return the faq.
-		
-
+	
 		return startWorkflowInstance(userId, faq, serviceContext);
-		*/
-		
+
+	}
+	
+	/**
+	 * Starts model workflow instance.
+	 * 
+	 * @param userId
+	 * @param faq
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 */
+	protected Faq startWorkflowInstance(
+		long userId, Faq faq, ServiceContext serviceContext)
+		throws PortalException {
+
+		Map<String, Serializable> workflowContext = new HashMap<String, Serializable>();
+
+		String userPortraitURL = "";
+		String userURL = "";
+
+		if (serviceContext.getThemeDisplay() != null) {
+			User user = userLocalService.getUser(userId);
+
+			userPortraitURL =
+				user.getPortraitURL(serviceContext.getThemeDisplay());
+			userURL = user.getDisplayURL(serviceContext.getThemeDisplay());
+		}
+
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_USER_PORTRAIT_URL, userPortraitURL);
+		workflowContext.put(WorkflowConstants.CONTEXT_USER_URL, userURL);
+
+		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			faq.getCompanyId(), faq.getGroupId(), userId,
+			Faq.class.getName(), faq.getFaqId(),
+			faq, serviceContext, workflowContext);
+	}
+	
+	/**
+	 * Updates model's workflow status.
+	 * 
+	 * @param userId
+	 * @param faqId
+	 * @param status
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	public Faq updateStatus(
+		long userId, long faqId, int status,
+		ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		User user = userLocalService.getUser(userId);
+		Faq faq = getFaq(faqId);
+
+		faq.setStatus(status);
+		faq.setStatusByUserId(userId);
+		faq.setStatusByUserName(user.getFullName());
+		faq.setStatusDate(new Date());
+
+		faqPersistence.update(faq);
+
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+
+			assetEntryLocalService.updateVisible(
+				Faq.class.getName(), faqId, true);
+
+		}
+		else {
+
+			assetEntryLocalService.updateVisible(
+				Faq.class.getName(), faqId, false);
+		}
+
 		return faq;
 	}
 	
@@ -272,7 +350,7 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Adds an assigment (silenced)
+	 * Adds an faq (silenced)
 	 * 
 	 * This is an example how to "silence" generated method.
 	 * 
