@@ -92,7 +92,7 @@ public class ViewFaqsMVCRenderCommand implements MVCRenderCommand {
 
 		renderRequest.setAttribute(
 				"ADTdisplayStyle",
-				portletPreferences.getValue("displayStyle", StringPool.BLANK));
+				portletPreferences.getValue("displayStyle", ""));
 		renderRequest.setAttribute(
 				"ADTdisplayStyleGroupId",
 				GetterUtil.getLong(
