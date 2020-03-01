@@ -203,6 +203,7 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 		long groupId, String keywords, int start, int end, int status,
 		OrderByComparator<Faq> orderByComparator) {
 
+		//https://portal.liferay.dev/docs/7-2/appdev/-/knowledge_base/a/dynamic-query
 		DynamicQuery faqQuery =
 			dynamicQuery().add(RestrictionsFactoryUtil.eq("groupId", groupId));
 
