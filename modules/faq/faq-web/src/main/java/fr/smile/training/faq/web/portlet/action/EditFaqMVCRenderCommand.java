@@ -71,7 +71,7 @@ public class EditFaqMVCRenderCommand implements MVCRenderCommand {
 
 		portletDisplay.setShowBackIcon(true);
 
-		String redirect = renderRequest.getRenderParameters().getValue("redirect");
+		String redirect = renderRequest.getParameter("redirect");
 
 		portletDisplay.setURLBack(redirect);
 

@@ -21,10 +21,12 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -57,9 +59,9 @@ import fr.smile.training.faq.validation.FaqValidator;
  * @see FaqLocalServiceBaseImpl
  */
 @Component(
-	property = "model.class.name=fr.smile.training.faq.model.Faq",
-	service = AopService.class
-)
+		property = "model.class.name=fr.smile.training.faq.model.Faq",
+		service = AopService.class
+		)
 public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 
 	/*
@@ -67,7 +69,7 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Use <code>fr.smile.training.faq.service.FaqLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>fr.smile.training.faq.service.FaqLocalServiceUtil</code>.
 	 */
-	
+
 	/**
 	 * Adds an faq.
 	 * 
@@ -80,11 +82,11 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	@Indexable(
-		type = IndexableType.REINDEX
-	)
+			type = IndexableType.REINDEX
+			)
 	public Faq addFaq(
-		long groupId, Map<Locale, String> titleMap, String description, ServiceContext serviceContext)
-		throws PortalException {
+			long groupId, Map<Locale, String> titleMap, String description, ServiceContext serviceContext)
+					throws PortalException {
 
 		// Validate faq parameters.
 
@@ -101,7 +103,7 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 		// Generate primary key for the faq.
 
 		long faqId =
-			counterLocalService.increment(Faq.class.getName());
+				counterLocalService.increment(Faq.class.getName());
 
 		// Create faq.
 
@@ -128,27 +130,51 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 		faq = super.addFaq(faq);
 
 		// Add permission resources.
-		
+
 		boolean portletActions = false;
 		boolean addGroupPermissions = true;
 		boolean addGuestPermissions = true;
 
 		resourceLocalService.addResources(
-			group.getCompanyId(), groupId, userId, Faq.class.getName(),
-			faq.getFaqId(), portletActions, addGroupPermissions,
-			addGuestPermissions);
+				group.getCompanyId(), groupId, userId, Faq.class.getName(),
+				faq.getFaqId(), portletActions, addGroupPermissions,
+				addGuestPermissions);
 
-		
+
 		// Update asset.
 
-		// updateAsset(faq, serviceContext);
+		updateAsset(faq, serviceContext);
 
 		// Start workflow instance and return the faq.
-	
+
 		return startWorkflowInstance(userId, faq, serviceContext);
 
 	}
-	
+
+	/**
+	 * Updates asset model related asset.
+	 * 
+	 * @param faq
+	 * @param serviceContext
+	 * @throws PortalException
+	 */
+	private void updateAsset(
+			Faq faq, ServiceContext serviceContext)
+					throws PortalException {
+
+		assetEntryLocalService.updateEntry(
+				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+				faq.getCreateDate(), faq.getModifiedDate(),
+				Faq.class.getName(), faq.getFaqId(),
+				faq.getUuid(), 0, serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames(), true, true,
+				faq.getCreateDate(), null, null, null,
+				ContentTypes.TEXT_HTML,
+				faq.getTitle(serviceContext.getLocale()),
+				faq.getDescription(), null, null, null, 0, 0,
+				serviceContext.getAssetPriority());
+	}	
+
 	/**
 	 * Starts model workflow instance.
 	 * 
@@ -159,8 +185,8 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	protected Faq startWorkflowInstance(
-		long userId, Faq faq, ServiceContext serviceContext)
-		throws PortalException {
+			long userId, Faq faq, ServiceContext serviceContext)
+					throws PortalException {
 
 		Map<String, Serializable> workflowContext = new HashMap<String, Serializable>();
 
@@ -171,20 +197,20 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 			User user = userLocalService.getUser(userId);
 
 			userPortraitURL =
-				user.getPortraitURL(serviceContext.getThemeDisplay());
+					user.getPortraitURL(serviceContext.getThemeDisplay());
 			userURL = user.getDisplayURL(serviceContext.getThemeDisplay());
 		}
 
 		workflowContext.put(
-			WorkflowConstants.CONTEXT_USER_PORTRAIT_URL, userPortraitURL);
+				WorkflowConstants.CONTEXT_USER_PORTRAIT_URL, userPortraitURL);
 		workflowContext.put(WorkflowConstants.CONTEXT_USER_URL, userURL);
 
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			faq.getCompanyId(), faq.getGroupId(), userId,
-			Faq.class.getName(), faq.getFaqId(),
-			faq, serviceContext, workflowContext);
+				faq.getCompanyId(), faq.getGroupId(), userId,
+				Faq.class.getName(), faq.getFaqId(),
+				faq, serviceContext, workflowContext);
 	}
-	
+
 	/**
 	 * Updates model's workflow status.
 	 * 
@@ -197,9 +223,9 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	 * @throws SystemException
 	 */
 	public Faq updateStatus(
-		long userId, long faqId, int status,
-		ServiceContext serviceContext)
-		throws PortalException, SystemException {
+			long userId, long faqId, int status,
+			ServiceContext serviceContext)
+					throws PortalException, SystemException {
 
 		User user = userLocalService.getUser(userId);
 		Faq faq = getFaq(faqId);
@@ -214,18 +240,18 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 
 			assetEntryLocalService.updateVisible(
-				Faq.class.getName(), faqId, true);
+					Faq.class.getName(), faqId, true);
 
 		}
 		else {
 
 			assetEntryLocalService.updateVisible(
-				Faq.class.getName(), faqId, false);
+					Faq.class.getName(), faqId, false);
 		}
 
 		return faq;
 	}
-	
+
 	/**
 	 * Updates faq.
 	 * 
@@ -238,11 +264,11 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	@Indexable(
-		type = IndexableType.REINDEX
-	)
+			type = IndexableType.REINDEX
+			)
 	public Faq updateFaq(
-		long faqId, Map<Locale, String> titleMap, String description, ServiceContext serviceContext)
-		throws PortalException {
+			long faqId, Map<Locale, String> titleMap, String description, ServiceContext serviceContext)
+					throws PortalException {
 
 		// Validate faq values
 		FaqValidator.validate(titleMap, description);
@@ -259,11 +285,51 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 
 		faq = super.updateFaq(faq);
 
-//		updateAsset(faq, serviceContext);
+		//		updateAsset(faq, serviceContext);
 
 		return faq;
 	}
-	
+
+	@Indexable(
+			type = IndexableType.DELETE
+			)
+	public Faq deleteFaq(long faqId)
+			throws PortalException {
+
+		Faq faq = getFaq(faqId);
+
+		return deleteFaq(faq);
+	}
+
+	/**
+	 * Deletes faq.
+	 * 
+	 * @param faq
+	 * @return
+	 * @throws PortalException 
+	 */
+	@Indexable(
+			type = IndexableType.DELETE
+			)
+	public Faq deleteFaq(Faq faq) throws PortalException {
+
+		// Delete permission resources.
+		resourceLocalService.deleteResource(
+				faq, ResourceConstants.SCOPE_INDIVIDUAL);
+
+		// Delete asset data.
+		assetEntryLocalService.deleteEntry(
+				Faq.class.getName(), faq.getFaqId());
+
+		// Delete workflow instance.
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+				faq.getCompanyId(), faq.getGroupId(),
+				Faq.class.getName(), faq.getFaqId());
+
+		// Delete the Faq
+		return super.deleteFaq(faq);
+	}
+
 	/**
 	 * Gets faqs by keywords and status.
 	 * 
@@ -278,12 +344,12 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	 * @return
 	 */
 	public List<Faq> getFaqsByKeywords(
-		long groupId, String keywords, int start, int end, int status,
-		OrderByComparator<Faq> orderByComparator) {
+			long groupId, String keywords, int start, int end, int status,
+			OrderByComparator<Faq> orderByComparator) {
 
 		//https://portal.liferay.dev/docs/7-2/appdev/-/knowledge_base/a/dynamic-query
 		DynamicQuery faqQuery =
-			dynamicQuery().add(RestrictionsFactoryUtil.eq("groupId", groupId));
+				dynamicQuery().add(RestrictionsFactoryUtil.eq("groupId", groupId));
 
 		if (status != WorkflowConstants.STATUS_ANY) {
 			faqQuery.add(RestrictionsFactoryUtil.eq("status", status));
@@ -291,17 +357,17 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 
 		if (Validator.isNotNull(keywords)) {
 			Disjunction disjunctionQuery =
-				RestrictionsFactoryUtil.disjunction();
+					RestrictionsFactoryUtil.disjunction();
 			disjunctionQuery.add(
-				RestrictionsFactoryUtil.like("title", "%" + keywords + "%"));
+					RestrictionsFactoryUtil.like("title", "%" + keywords + "%"));
 			disjunctionQuery.add(
-				RestrictionsFactoryUtil.like(
-					"description", "%" + keywords + "%"));
+					RestrictionsFactoryUtil.like(
+							"description", "%" + keywords + "%"));
 			faqQuery.add(disjunctionQuery);
 		}
 
 		return faqLocalService.dynamicQuery(
-			faqQuery, start, end, orderByComparator);
+				faqQuery, start, end, orderByComparator);
 	}
 
 	public List<Faq> getFaqsByStatus(int status) {
@@ -309,7 +375,7 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 		return faqPersistence.findByStatus(status);
 	}
 
-	
+
 	public int getFaqsCountByGroupId(long groupId) {
 
 		return faqPersistence.countByGroupId(groupId);
@@ -326,10 +392,10 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	 * @return
 	 */
 	public long getFaqsCountByKeywords(
-		long groupId, String keywords, int status) {
+			long groupId, String keywords, int status) {
 
 		DynamicQuery faqQuery =
-			dynamicQuery().add(RestrictionsFactoryUtil.eq("groupId", groupId));
+				dynamicQuery().add(RestrictionsFactoryUtil.eq("groupId", groupId));
 
 		if (status != WorkflowConstants.STATUS_ANY) {
 			faqQuery.add(RestrictionsFactoryUtil.eq("status", status));
@@ -337,12 +403,12 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 
 		if (Validator.isNotNull(keywords)) {
 			Disjunction disjunctionQuery =
-				RestrictionsFactoryUtil.disjunction();
+					RestrictionsFactoryUtil.disjunction();
 			disjunctionQuery.add(
-				RestrictionsFactoryUtil.like("title", "%" + keywords + "%"));
+					RestrictionsFactoryUtil.like("title", "%" + keywords + "%"));
 			disjunctionQuery.add(
-				RestrictionsFactoryUtil.like(
-					"description", "%" + keywords + "%"));
+					RestrictionsFactoryUtil.like(
+							"description", "%" + keywords + "%"));
 			faqQuery.add(disjunctionQuery);
 		}
 
@@ -361,6 +427,6 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	public Faq addFaq(Faq faq) {
 
 		throw new UnsupportedOperationException(
-			"please use instead addFaq(Faq, ServiceContext)");
+				"please use instead addFaq(Faq, ServiceContext)");
 	}
 }

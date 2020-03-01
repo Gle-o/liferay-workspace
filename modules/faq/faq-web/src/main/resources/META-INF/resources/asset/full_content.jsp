@@ -1,8 +1,5 @@
-<%--
-	The Gradebook portlet frontend initialization file, containing:
-		- Taglib declarations
-		- Imports
-		- Variable initializations
+<%-- 
+	This is for showing assignment full content in Asset Publisher portlet.  
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -37,3 +34,19 @@
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+
+<%
+	AssetRenderer<?> assetRenderer = (AssetRenderer<?>)request.getAttribute(WebKeys.ASSET_RENDERER);
+					
+	String viewEntryURL = assetRenderer.getURLView(liferayPortletResponse, WindowState.MAXIMIZED);
+					
+	Faq faq = (Faq)request.getAttribute("faq");					
+%>
+
+<aui:a cssClass="title-link" href="<%= viewEntryURL %>">
+	<h3 class="title"><%= HtmlUtil.escape(faq.getTitle(locale)) %></h3>
+</aui:a>
+
+<div class="autofit-col autofit-col-expand">
+	${assignment.getDescription()}
+</div>

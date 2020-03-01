@@ -8,4 +8,7 @@ dependencies {
 	compileOnly project(":modules:faq:faq-api")
 	compileOnly 'com.liferay:com.liferay.frontend.taglib.clay'
 	compileOnly 'com.liferay:com.liferay.petra.function'
+	compileOnly 'com.liferay:com.liferay.asset.api'
+	compileOnly 'javax.portlet:portlet-api'
+	compileOnly 'com.liferay:com.liferay.asset.display.page.api'
 }

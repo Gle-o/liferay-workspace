@@ -25,8 +25,8 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.supported-locale=en",
         "javax.portlet.supported-locale=es",
 		"javax.portlet.security-role-ref=power-user,user",
-		"javax.portlet.version=3.0",
-        "com.liferay.portlet.display-category=category.training"
+        "com.liferay.portlet.display-category=category.training",
+		"com.liferay.portlet.add-default-resource=true"
 	},
 	service = Portlet.class
 )

@@ -1,8 +1,5 @@
-<%--
-	The Gradebook portlet frontend initialization file, containing:
-		- Taglib declarations
-		- Imports
-		- Variable initializations
+<%-- 
+	This is for showing assignment abstract in Asset Publisher portlet.  
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -37,3 +34,11 @@
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+
+<p>
+	<%
+		AssetRenderer<?> assetRenderer = (AssetRenderer<?>)request.getAttribute(WebKeys.ASSET_RENDERER);
+	%>
+
+	<%= HtmlUtil.escape(assetRenderer.getSummary(renderRequest, renderResponse)) %>
+</p>

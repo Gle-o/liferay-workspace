@@ -93,7 +93,7 @@ public class EditFaqMVCActionCommand extends BaseMVCActionCommand {
 			e.getErrors().forEach(
 				key -> SessionErrors.add(actionRequest, key));
 			
-			actionResponse.getRenderParameters().setValue(
+			actionResponse.setRenderParameter(
 				"mvcRenderCommandName", MVCCommandNames.EDIT_FAQ);			
 
 		}
@@ -105,7 +105,7 @@ public class EditFaqMVCActionCommand extends BaseMVCActionCommand {
 			
 			SessionErrors.add(actionRequest, "error.faq-service-error");
 
-			actionResponse.getRenderParameters().setValue(
+			actionResponse.setRenderParameter(
 				"mvcRenderCommandName", MVCCommandNames.EDIT_FAQ);			
 		}
 	}

@@ -16,7 +16,7 @@ import org.osgi.service.component.annotations.Reference;
 import fr.smile.training.faq.model.Faq;
 
 /**
- * @author Luan Maoski
+ * @author Guillaume Lenoir
  */
 @Component(immediate = true, service = {})
 public class FaqEntrySearchRegistrar {
