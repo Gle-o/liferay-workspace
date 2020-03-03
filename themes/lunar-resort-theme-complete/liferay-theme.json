@@ -1,0 +1,11 @@
+{
+  "LiferayTheme": {
+    "deploymentStrategy": "LocalAppServer",
+    "appServerPath": "/Users/guillaumelenoir/Desktop/Smile/smileTraining/LiferayFormation72/LiferayProjectSDKwithDevStudioCommunityEdition/liferay-workspace/bundles/tomcat-9.0.17",
+    "deployPath": "/Users/guillaumelenoir/Desktop/Smile/smileTraining/LiferayFormation72/LiferayProjectSDKwithDevStudioCommunityEdition/liferay-workspace/bundles/deploy",
+    "url": "http://localhost:8080",
+    "appServerPathPlugin": "/Users/guillaumelenoir/Desktop/Smile/smileTraining/LiferayFormation72/LiferayProjectSDKwithDevStudioCommunityEdition/liferay-workspace/themes/lunar-resort-theme-complete/.web_bundle_build",
+    "deployed": true,
+    "pluginName": "lunar-resort-theme7-2-new-theme"
+  }
+}
