@@ -1,0 +1,190 @@
+components:
+    schemas:
+        Faq:
+            description: Represents an faq.
+            properties:
+                date:
+                    format: date-time
+                    type: string
+                id:
+                    format: int64
+                    type: integer
+                title:
+                    type: string
+            required:
+                - title
+            type: object
+        Owner:
+            properties:
+                name:
+                    type: string
+info:
+    description: ""
+    license:
+        name: "Apache 2.0"
+        url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    title: "Faqs"
+    version: v1.0
+openapi: 3.0.1
+paths:
+    "/faqs/{faqId}":
+        delete:
+            description:
+            operationId: deleteFaq
+            parameters:
+                - in: path
+                  name: faqId
+                  required: true
+                  schema:
+                      format: int64
+                      type: integer
+            responses:
+                204:
+                    content:
+                        application/json: {}
+                        application/xml: {}
+            tags: ["Faq"]
+        get:
+            operationId: getFaq
+            parameters:
+                - in: path
+                  name: faqId
+                  required: true
+                  schema:
+                      format: int64
+                      type: integer
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Faq"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/Faq"
+                    description: "Get faq"
+            tags: ["Faq"]
+        put:
+            description: ""
+            operationId: putFaq
+            parameters:
+                - in: path
+                  name: faqId
+                  required: true
+                  schema:
+                      format: int64
+                      type: integer
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Faq"
+                    application/xml:
+                        schema:
+                            $ref: "#/components/schemas/Faq"
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Faq"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/Faq"
+                    description: ""
+            tags: ["Faq"]
+    "/faqs/{faqId}/owner":
+        get:
+            operationId: getFaqOwner
+            parameters:
+                - in: path
+                  name: faqId
+                  required: true
+                  schema:
+                      format: int64
+                      type: integer
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Owner"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/Owner"
+                    description: ""
+            tags: ["Faq"]
+    "/sites/{siteId}/faqs":
+        get:
+            operationId: getSiteFaqsPage
+            parameters:
+                - in: path
+                  name: siteId
+                  required: true
+                  schema:
+                      format: int64
+                      type: integer
+                - in: query
+                  name: filter
+                  schema:
+                      type: string
+                - in: query
+                  name: page
+                  schema:
+                      type: integer
+                - in: query
+                  name: pageSize
+                  schema:
+                      type: integer
+                - in: query
+                  name: search
+                  schema:
+                      type: string
+                - in: query
+                  name: sort
+                  schema:
+                      type: string
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: "#/components/schemas/Faq"
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: "#/components/schemas/Faq"
+                                type: array
+                    description: "Get faqs"
+            tags: ["Faq"]
+        post:
+            description: ""
+            operationId: postSiteFaq
+            parameters:
+                - in: path
+                  name: siteId
+                  required: true
+                  schema:
+                      format: int64
+                      type: integer
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Faq"
+                    application/xml:
+                        schema:
+                            $ref: "#/components/schemas/Faq"
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Faq"
+                        application/xml:
+                            schema:
+                                $ref: "#/components/schemas/Faq"
+                    description: ""
+            tags: ["Faq"]

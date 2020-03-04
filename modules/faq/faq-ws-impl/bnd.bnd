@@ -1,0 +1,4 @@
+Bundle-Name: faq-ws-impl
+Bundle-SymbolicName: faq.ws.impl
+Bundle-Version: 1.0.0
+Export-Package: faq.ws.impl.api

@@ -1,0 +1,4 @@
+Bundle-Name: faq-ws-api
+Bundle-SymbolicName: faq.ws.api
+Bundle-Version: 1.0.0
+Export-Package: faq.ws.api.constants
