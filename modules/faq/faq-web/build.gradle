@@ -13,4 +13,5 @@ dependencies {
 	compileOnly 'com.liferay:com.liferay.asset.display.page.api'
 	compileOnly 'com.liferay:com.liferay.dynamic.data.mapping.taglib'
 	
+	compileOnly 'com.liferay:com.liferay.application.list.api'
 }
