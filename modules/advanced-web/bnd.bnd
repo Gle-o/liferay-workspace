@@ -4,3 +4,6 @@ Bundle-Version: 1.0.0
 Export-Package: fr.smile.training.web.portlet.constants
 Require-Capability: osgi.contract; filter:="(&(osgi.contract=JavaJAXRS)(version=2))"
 -sources: true
+Web-ContextPath: /AdvancedWebStrutsAction
+-jsp: *.jsp,*.jspf
+-plugin.jsp: com.liferay.ant.bnd.jsp.JspAnalyzerPlugin

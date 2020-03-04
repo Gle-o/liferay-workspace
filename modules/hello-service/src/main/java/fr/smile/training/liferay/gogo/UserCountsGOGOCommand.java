@@ -44,7 +44,7 @@ public class UserCountsGOGOCommand {
 
 	public void usercount() {
 		System.out.println(
-			"# of users: " + getUserLocalService().getUsersCount());
+			"# of users:" + getUserLocalService().getUsersCount());
 	}
 
 	/**
