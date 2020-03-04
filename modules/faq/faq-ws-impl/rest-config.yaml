@@ -1,5 +1,5 @@
 apiDir: "../faq-ws-api/src/main/java"
-apiPackagePath: "fr.smile.training.faq"
+apiPackagePath: "fr.smile.training.faq.ws"
 application:
     baseURI: "/faqs"
     className: "FaqsApplication"
