@@ -3,10 +3,6 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.annotation.versioning"
 	compileOnly group: "org.osgi", name: "org.osgi.core"
 	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
-	compileOnly 'com.liferay:com.liferay.portal.vulcan.api'
-	compileOnly 'com.fasterxml.jackson.core:jackson-annotations'
-	compileOnly 'com.liferay:com.liferay.petra.function'
-	compileOnly 'com.liferay:com.liferay.petra.string'
 	compileOnly 'javax.servlet:javax.servlet-api'
 	compileOnly 'javax.ws.rs:javax.ws.rs-api'
 }

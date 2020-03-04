@@ -21,6 +21,11 @@ dependencies {
 	compileOnly 'javax.ws.rs:javax.ws.rs-api'
 	
 	compileOnly group: "javax.validation", name: "validation-api", version: "2.0.1.Final"
+	compileOnly 'com.liferay:com.liferay.portal.odata.api'
+	compileOnly project(":modules:faq:faq-ws-api")
+	
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.10"
+	compileOnly group: "io.swagger.core.v3", name: "swagger-annotations", version: "2.0.5"
 }
 
 buildscript {
