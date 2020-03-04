@@ -102,12 +102,6 @@ public class Owner {
 		return sb.toString();
 	}
 
-	@Schema(
-		defaultValue = "fr.smile.training.faq.ws.dto.v1_0.Owner",
-		name = "x-class-name"
-	)
-	public String xClassName;
-
 	private static String _escape(Object object) {
 		String string = String.valueOf(object);
 

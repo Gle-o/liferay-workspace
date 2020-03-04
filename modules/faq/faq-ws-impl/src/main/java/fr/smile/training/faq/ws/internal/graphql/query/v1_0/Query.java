@@ -2,6 +2,8 @@ package fr.smile.training.faq.ws.internal.graphql.query.v1_0;
 
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -15,15 +17,12 @@ import fr.smile.training.faq.ws.dto.v1_0.Faq;
 import fr.smile.training.faq.ws.dto.v1_0.Owner;
 import fr.smile.training.faq.ws.resource.v1_0.FaqResource;
 
-import java.util.Map;
 import java.util.function.BiFunction;
 
 import javax.annotation.Generated;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import javax.validation.constraints.NotEmpty;
 
 import javax.ws.rs.core.UriInfo;
 
@@ -47,7 +46,7 @@ public class Query {
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {faq(faqId: ___){date, id, title}}"}' -u 'test@liferay.com:test'
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {faq(faqId: ___){date, id, title, description}}"}' -u 'test@liferay.com:test'
 	 */
 	@GraphQLField
 	public Faq faq(@GraphQLName("faqId") Long faqId) throws Exception {
@@ -71,11 +70,12 @@ public class Query {
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {faqs(filter: ___, page: ___, pageSize: ___, search: ___, siteKey: ___, sorts: ___){items {__}, page, pageSize, totalCount}}"}' -u 'test@liferay.com:test'
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {faqs(filter: ___, page: ___, pageSize: ___, search: ___, siteId: ___, sorts: ___){items {__}, page, pageSize, totalCount}}"}' -u 'test@liferay.com:test'
 	 */
 	@GraphQLField
 	public FaqPage faqs(
-			@GraphQLName("siteKey") @NotEmpty String siteKey,
+			@GraphQLName("siteId") Long siteId,
+			@GraphQLName("siteKey") String siteKey,
 			@GraphQLName("search") String search,
 			@GraphQLName("filter") String filterString,
 			@GraphQLName("pageSize") int pageSize,
@@ -87,7 +87,7 @@ public class Query {
 			_faqResourceComponentServiceObjects, this::_populateResourceContext,
 			faqResource -> new FaqPage(
 				faqResource.getSiteFaqsPage(
-					Long.valueOf(siteKey), search,
+					siteId, search,
 					_filterBiFunction.apply(faqResource, filterString),
 					Pagination.of(page, pageSize),
 					_sortsBiFunction.apply(faqResource, sortsString))));
@@ -116,22 +116,14 @@ public class Query {
 	public class FaqPage {
 
 		public FaqPage(Page faqPage) {
-			actions = faqPage.getActions();
 			items = faqPage.getItems();
-			lastPage = faqPage.getLastPage();
 			page = faqPage.getPage();
 			pageSize = faqPage.getPageSize();
 			totalCount = faqPage.getTotalCount();
 		}
 
 		@GraphQLField
-		protected Map<String, Map> actions;
-
-		@GraphQLField
 		protected java.util.Collection<Faq> items;
-
-		@GraphQLField
-		protected long lastPage;
 
 		@GraphQLField
 		protected long page;
@@ -180,10 +172,10 @@ public class Query {
 	private AcceptLanguage _acceptLanguage;
 	private BiFunction<Object, String, Filter> _filterBiFunction;
 	private BiFunction<Object, String, Sort[]> _sortsBiFunction;
-	private com.liferay.portal.kernel.model.Company _company;
-	private com.liferay.portal.kernel.model.User _user;
+	private Company _company;
 	private HttpServletRequest _httpServletRequest;
 	private HttpServletResponse _httpServletResponse;
 	private UriInfo _uriInfo;
+	private User _user;
 
 }

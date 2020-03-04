@@ -64,6 +64,34 @@ public class Faq {
 	protected Date date;
 
 	@Schema
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@JsonIgnore
+	public void setDescription(
+		UnsafeSupplier<String, Exception> descriptionUnsafeSupplier) {
+
+		try {
+			description = descriptionUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String description;
+
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -162,6 +190,20 @@ public class Faq {
 			sb.append("\"");
 		}
 
+		if (description != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"description\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(description));
+
+			sb.append("\"");
+		}
+
 		if (id != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -190,12 +232,6 @@ public class Faq {
 
 		return sb.toString();
 	}
-
-	@Schema(
-		defaultValue = "fr.smile.training.faq.ws.dto.v1_0.Faq",
-		name = "x-class-name"
-	)
-	public String xClassName;
 
 	private static String _escape(Object object) {
 		String string = String.valueOf(object);

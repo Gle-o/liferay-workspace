@@ -2,6 +2,8 @@ package fr.smile.training.faq.ws.internal.graphql.mutation.v1_0;
 
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
 import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
@@ -14,9 +16,6 @@ import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javax.validation.constraints.NotEmpty;
-
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.osgi.service.component.ComponentServiceObjects;
@@ -48,17 +47,6 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public Response deleteFaqBatch(
-			@GraphQLName("callbackURL") String callbackURL,
-			@GraphQLName("object") Object object)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_faqResourceComponentServiceObjects, this::_populateResourceContext,
-			faqResource -> faqResource.deleteFaqBatch(callbackURL, object));
-	}
-
-	@GraphQLField(description = "")
 	public Faq updateFaq(
 			@GraphQLName("faqId") Long faqId, @GraphQLName("faq") Faq faq)
 		throws Exception {
@@ -69,38 +57,14 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public Response updateFaqBatch(
-			@GraphQLName("callbackURL") String callbackURL,
-			@GraphQLName("object") Object object)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_faqResourceComponentServiceObjects, this::_populateResourceContext,
-			faqResource -> faqResource.putFaqBatch(callbackURL, object));
-	}
-
-	@GraphQLField(description = "")
 	public Faq createSiteFaq(
-			@GraphQLName("siteKey") @NotEmpty String siteKey,
-			@GraphQLName("faq") Faq faq)
+			@GraphQLName("siteId") Long siteId,
+			@GraphQLName("siteKey") String siteKey, @GraphQLName("faq") Faq faq)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_faqResourceComponentServiceObjects, this::_populateResourceContext,
-			faqResource -> faqResource.postSiteFaq(Long.valueOf(siteKey), faq));
-	}
-
-	@GraphQLField
-	public Response createSiteFaqBatch(
-			@GraphQLName("siteKey") @NotEmpty String siteKey,
-			@GraphQLName("callbackURL") String callbackURL,
-			@GraphQLName("object") Object object)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_faqResourceComponentServiceObjects, this::_populateResourceContext,
-			faqResource -> faqResource.postSiteFaqBatch(
-				Long.valueOf(siteKey), callbackURL, object));
+			faqResource -> faqResource.postSiteFaq(siteId, faq));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
@@ -156,10 +120,10 @@ public class Mutation {
 		_faqResourceComponentServiceObjects;
 
 	private AcceptLanguage _acceptLanguage;
-	private com.liferay.portal.kernel.model.Company _company;
-	private com.liferay.portal.kernel.model.User _user;
+	private Company _company;
 	private HttpServletRequest _httpServletRequest;
 	private HttpServletResponse _httpServletResponse;
 	private UriInfo _uriInfo;
+	private User _user;
 
 }

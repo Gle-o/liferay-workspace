@@ -12,7 +12,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"liferay.jackson=false", "osgi.jaxrs.application.base=/faqs",
+		"osgi.jaxrs.application.base=/faqs",
 		"osgi.jaxrs.extension.select=(osgi.jaxrs.name=Liferay.Vulcan)",
 		"osgi.jaxrs.name=Liferay.Faqs"
 	},
