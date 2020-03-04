@@ -1,0 +1,12 @@
+Bundle-Name: faq-api
+Bundle-SymbolicName: fr.smile.training.faq.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	fr.smile.training.faq.exception,\
+	fr.smile.training.faq.model,\
+	fr.smile.training.faq.service,\
+	fr.smile.training.faq.service.persistence,\
+	fr.smile.training.faq.service.permission,\
+	fr.smile.training.faq.web.constants
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../faq-service/service.xml

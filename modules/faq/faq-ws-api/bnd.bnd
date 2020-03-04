@@ -1,0 +1,6 @@
+Bundle-Name: faq-ws-api
+Bundle-SymbolicName: faq.ws.api
+Bundle-Version: 1.0.0
+Export-Package: \
+	fr.smile.training.faq.ws.resource.v1_0,\
+	fr.smile.training.faq.ws.dto.v1_0

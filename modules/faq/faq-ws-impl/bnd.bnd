@@ -1,0 +1,6 @@
+Bundle-Name: faq-ws-impl
+Bundle-SymbolicName: faq.ws.impl
+Bundle-Version: 1.0.0
+Import-Package: com.liferay.*;version="[1.0.0,99.0.0)",\
+\
+		*

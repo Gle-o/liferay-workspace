@@ -1,0 +1,3 @@
+Bundle-Name: user-service-override
+Bundle-SymbolicName: fr.smile.training.liferay.service
+Bundle-Version: 1.0.0

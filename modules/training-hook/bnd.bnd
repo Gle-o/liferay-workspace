@@ -1,0 +1,7 @@
+Bundle-Name: training-hook
+Bundle-SymbolicName: training.hook
+Bundle-Version: 1.0.0
+Provide-Capability:\
+liferay.resource.bundle;resource.bundle.base.name="content.Language",\
+liferay.resource.bundle;resource.bundle.aggregate:String="(bundle.symbolic.name=training.hook),(bundle.symbolic.name=com.liferay.blogs.web)";bundle.symbolic.name=com.liferay.blogs.web;resource.bundle.base.name="content.Language";service.ranking:Long="2";\
+servlet.context.name=blogs-web
