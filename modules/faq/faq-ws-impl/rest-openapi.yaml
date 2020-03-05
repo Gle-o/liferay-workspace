@@ -31,7 +31,7 @@ openapi: 3.0.1
 paths:
     "/faqs/{faqId}":
         delete:
-            description:
+            description: delete faq
             operationId: deleteFaq
             parameters:
                 - in: path
@@ -42,6 +42,7 @@ paths:
                       type: integer
             responses:
                 204:
+                    description: No content
                     content:
                         application/json: {}
                         application/xml: {}
