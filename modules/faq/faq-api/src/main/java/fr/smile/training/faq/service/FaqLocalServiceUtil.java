@@ -88,9 +88,11 @@ public class FaqLocalServiceUtil {
 	 *
 	 * @param faq the faq
 	 * @return the faq that was removed
+	 * @throws PortalException
 	 */
 	public static fr.smile.training.faq.model.Faq deleteFaq(
-		fr.smile.training.faq.model.Faq faq) {
+			fr.smile.training.faq.model.Faq faq)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().deleteFaq(faq);
 	}

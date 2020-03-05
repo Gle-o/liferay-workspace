@@ -130,10 +130,11 @@ public abstract class FaqLocalServiceBaseImpl
 	 *
 	 * @param faq the faq
 	 * @return the faq that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Faq deleteFaq(Faq faq) {
+	public Faq deleteFaq(Faq faq) throws PortalException {
 		return faqPersistence.remove(faq);
 	}
 

@@ -107,9 +107,10 @@ public interface FaqLocalService
 	 *
 	 * @param faq the faq
 	 * @return the faq that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public Faq deleteFaq(Faq faq);
+	public Faq deleteFaq(Faq faq) throws PortalException;
 
 	/**
 	 * Deletes the faq with the primary key from the database. Also notifies the appropriate model listeners.

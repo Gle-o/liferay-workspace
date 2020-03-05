@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
@@ -234,6 +235,35 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 	public int getFaqsCountByGroupId(long groupId) {
 
 		return faqPersistence.countByGroupId(groupId);
+	}
+	
+	/**
+	 * Deletes faq.
+	 * 
+	 * @param faq
+	 * @return
+	 * @throws PortalException 
+	 */
+	@Indexable(
+			type = IndexableType.DELETE
+			)
+	public Faq deleteFaq(Faq faq) throws PortalException {
+
+		// Delete permission resources.
+		resourceLocalService.deleteResource(
+				faq, ResourceConstants.SCOPE_INDIVIDUAL);
+
+		// Delete asset data.
+		assetEntryLocalService.deleteEntry(
+				Faq.class.getName(), faq.getFaqId());
+
+		// Delete workflow instance.
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+				faq.getCompanyId(), faq.getGroupId(),
+				Faq.class.getName(), faq.getFaqId());
+
+		// Delete the Faq
+		return super.deleteFaq(faq);
 	}
 
 	/**
