@@ -285,7 +285,7 @@ public class FaqLocalServiceImpl extends FaqLocalServiceBaseImpl {
 
 		faq = super.updateFaq(faq);
 
-		//		updateAsset(faq, serviceContext);
+		updateAsset(faq, serviceContext);
 
 		return faq;
 	}
